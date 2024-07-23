@@ -1,6 +1,8 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.dev.tools.ksp)
+    id(libs.plugins.dagger.hilt.android.get().pluginId)
 }
 
 android {
@@ -15,6 +17,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -24,6 +29,15 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "HOST_API", "\"https://reqres.in\"")
+            buildConfigField("okhttp3.logging.HttpLoggingInterceptor.Level", "LEVEL_LOGS", "okhttp3.logging.HttpLoggingInterceptor.Level.NONE")
+        }
+
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
+            buildConfigField("String", "HOST_API", "\"https://reqres.in\"")
+            buildConfigField("okhttp3.logging.HttpLoggingInterceptor.Level", "LEVEL_LOGS", "okhttp3.logging.HttpLoggingInterceptor.Level.BODY")
         }
     }
     compileOptions {
@@ -33,14 +47,46 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.12.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    implementation(libs.core.ktx)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.compose)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.okhttp)
+    implementation(libs.coil.compose)
+    implementation(libs.swipe.refresh)
+    implementation(libs.crypto)
+
+    // Test mockito
+    testImplementation(libs.mockito)
+    androidTestImplementation(libs.mockitoAndroid)
+    testImplementation(libs.mockitoKotlin)
+
+    // Test MockWebServer
+    testImplementation(libs.mockk)
+    testImplementation(libs.coroutineTest)
+
+    implementation("androidx.compose.material:material-icons-extended:1.0.0")
 }

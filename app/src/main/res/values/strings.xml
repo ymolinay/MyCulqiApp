@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">MyCulqiApp</string>
+    <string name="emptyField">Empty field</string>
+    <string name="emailInvalid">Invalid email</string>
+    <string name="common.error">Error inesperado</string>
+    <string name="common.error.login">Error inicio de sesión</string>
+    <string name="common.error.signup">Error registro de usuario</string>
+    <string name="welcome.title">Hi!</string>
+    <string name="welcome.email">Email</string>
+    <string name="welcome.continue">Continue</string>
+    <string name="welcome.or">or</string>
+    <string name="welcome.continue.facebook">Continue with Facebook</string>
+    <string name="welcome.continue.google">Continue with Google</string>
+    <string name="welcome.continue.apple">Continue with Apple</string>
+    <string name="welcome.dont.account">Don`t have an account</string>
+    <string name="welcome.dont.account.signup">Sign up</string>
+    <string name="welcome.forgot.password">Forgot your password?</string>
+    <string name="signup.title">Sign up</string>
+    <string name="signup.subtitle">Looks like you don`t have an account.\nLet`s create a new account for</string>
+    <string name="signup.name">Name</string>
+    <string name="signup.terms">By selecting Agree and continue below,</string>
+    <string name="signup.terms.agree">I agree to</string>
+    <string name="signup.terms.agree.terms">Terms of Service and Privacy Policy</string>
+    <string name="signup.terms.agree.continue">Agree and continue</string>
+    <string name="login.title">Login</string>
+    <string name="login.name">Name</string>
+    <string name="login.password">Password</string>
+    <string name="login.password.view">View</string>
+    <string name="login.password.hide">Hide</string>
+    <string name="home.title">Home</string>
+    <string name="home.friends">My friends</string>
 </resources>
